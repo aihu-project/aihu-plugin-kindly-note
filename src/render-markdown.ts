@@ -11,8 +11,8 @@
  * controls are normalised. So `renderMarkdown()`'s return value is SAFE to drop
  * straight into `innerHTML` / `nodeValue` under the defaults.
  *
- * This is the RENDERING half (Shape A, round 2), the sibling of the
- * HIGHLIGHTING half in ./highlight.ts. Both follow the identical dep-free,
+ * This is the rendering half, the sibling of the highlighting half in
+ * ./highlight.ts. Both follow the identical dep-free,
  * lazy-import, SSR-safe, signal-aware pattern: the `@kindly-note/*` packages are
  * OPTIONAL peerDependencies, imported with `await import()` inside the function
  * below (never at module top level), so merely importing

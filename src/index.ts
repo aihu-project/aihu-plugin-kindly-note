@@ -29,7 +29,7 @@
  *
  * Lazy loading: NO `@kindly-note/lang-*` package is statically imported here, so
  * a bundler cannot pull every language in. Each tokenizer is fetched via dynamic
- * `import()` the first time its language is used (~1.5 kB gz/language). The
+ * `import()` the first time its language is used. The
  * markdown renderer is loaded the same way — `@kindly-note/render-markdown` is
  * an optional peer, resolved only on the first renderMarkdown() call.
  *

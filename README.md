@@ -7,13 +7,13 @@ Runtime syntax highlighting + markdown rendering for aihu — <aihu-code>/<aihu-
 
 <!-- BEGIN_HANDWRITTEN: prose -->
 Runtime syntax highlighting **and** markdown rendering for
-[aihu](../../README.md), powered by the published
+[aihu](https://github.com/aihu-project/aihu#readme), powered by the published
 [`@kindly-note/*`](https://www.npmjs.com/org/kindly-note) packages. Ships two
 custom elements and two signal-aware helpers, all rendered **in the browser, at
 runtime**, with **lazy-loaded** peers:
 
 - **Highlighting** — `<aihu-code>` + `highlight()` render scoped-span HTML, with
-  per-language tokenizers fetched on demand (~1.5 kB gz each).
+  language tokenizers fetched only when requested.
 - **Markdown rendering** — `<aihu-markdown>` + `renderMarkdown()` render
   CommonMark to **safe** semantic HTML via `@kindly-note/render-markdown` (raw
   HTML escaped, `javascript:`/unsafe `data:` URLs neutralised, `on*` handlers
@@ -164,7 +164,7 @@ npm install @aihu-plugin/kindly-note
 bun add @aihu-plugin/kindly-note
 ```
 
-<sub><i>Auto-generated against `@aihu-plugin/kindly-note@0.2.4`.</i></sub>
+<sub><i>Auto-generated against `@aihu-plugin/kindly-note@0.2.5`.</i></sub>
 
 <!-- END_AUTOGEN: install -->
 
@@ -175,13 +175,13 @@ bun add @aihu-plugin/kindly-note
 
 | | |
 |---|---|
-| **Version** | `0.2.4` |
+| **Version** | `0.2.5` |
 | **Tier** | F — UI — runtime syntax highlighting + markdown custom elements |
 | **Bundle size** | 1.65 kB (gz) — limit 1850 B |
-| **Published files** | 3 entries |
+| **Published files** | 7 archive files |
 | **License** | MIT |
 
-<sub><i>Auto-generated against `@aihu-plugin/kindly-note@0.2.4`.</i></sub>
+<sub><i>Auto-generated against `@aihu-plugin/kindly-note@0.2.5`.</i></sub>
 
 <!-- END_AUTOGEN: stats -->
 
@@ -194,7 +194,7 @@ bun add @aihu-plugin/kindly-note
 |---|---|---|
 | `.` | `./dist/index.js` | `—` |
 
-<sub><i>Auto-generated against `@aihu-plugin/kindly-note@0.2.4`.</i></sub>
+<sub><i>Auto-generated against `@aihu-plugin/kindly-note@0.2.5`.</i></sub>
 
 <!-- END_AUTOGEN: exports -->
 
@@ -214,7 +214,7 @@ bun add @aihu-plugin/kindly-note
 - `@kindly-note/loader-dynamic-import` — `^0.1.0`
 - `@kindly-note/render-markdown` — `^0.1.0`
 
-<sub><i>Auto-generated against `@aihu-plugin/kindly-note@0.2.4`.</i></sub>
+<sub><i>Auto-generated against `@aihu-plugin/kindly-note@0.2.5`.</i></sub>
 
 <!-- END_AUTOGEN: deps -->
 
@@ -226,7 +226,7 @@ bun add @aihu-plugin/kindly-note
 - [@aihu/ui](../ui)
 - [Aihu framework root](../../README.md)
 
-<sub><i>Auto-generated against `@aihu-plugin/kindly-note@0.2.4`.</i></sub>
+<sub><i>Auto-generated against `@aihu-plugin/kindly-note@0.2.5`.</i></sub>
 
 <!-- END_AUTOGEN: see-also -->
 
@@ -235,8 +235,8 @@ bun add @aihu-plugin/kindly-note
 <!-- BEGIN_AUTOGEN: license -->
 <!-- regenerate: bun scripts/sync-readme.ts (also runs in pre-commit + CI) -->
 
-MIT — see [LICENSE](../../LICENSE).
+MIT — see [LICENSE](LICENSE).
 
-<sub><i>Auto-generated against `@aihu-plugin/kindly-note@0.2.4`.</i></sub>
+<sub><i>Auto-generated against `@aihu-plugin/kindly-note@0.2.5`.</i></sub>
 
 <!-- END_AUTOGEN: license -->

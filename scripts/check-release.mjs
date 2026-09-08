@@ -1,0 +1,18 @@
+import { execFileSync } from 'node:child_process'
+import { readFileSync } from 'node:fs'
+
+const manifest = JSON.parse(readFileSync(new URL('../package.json', import.meta.url)))
+const tag = process.argv[2] ?? process.env.RELEASE_TAG ?? process.env.GITHUB_REF_NAME
+if (!tag) throw new Error('release tag is required')
+
+const stable = /^v(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)$/
+if (!stable.test(tag)) throw new Error(`release tag is not an exact stable semver: ${tag}`)
+if (tag !== `v${manifest.version}`) {
+  throw new Error(`release tag ${tag} does not equal package version v${manifest.version}`)
+}
+
+const taggedCommit = execFileSync('git', ['rev-parse', `${tag}^{commit}`], { encoding: 'utf8' }).trim()
+const expectedCommit = process.env.GITHUB_SHA ?? execFileSync('git', ['rev-parse', 'HEAD'], { encoding: 'utf8' }).trim()
+if (taggedCommit !== expectedCommit) throw new Error('release tag does not point at the workflow commit')
+
+console.log(`${manifest.name}@${manifest.version}: exact stable tag ${tag} at ${taggedCommit}`)

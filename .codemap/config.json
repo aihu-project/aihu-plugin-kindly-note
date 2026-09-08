@@ -1,0 +1,35 @@
+{
+  "$comment": "Tuned for the standalone TypeScript plugin. Build output, local installs, archives, and coverage stay out of the map; source, tests, release contract, and package metadata remain visible.",
+  "only": ["ts", "mjs", "json", "yml", "md"],
+  "exclude": ["dist/**", "coverage/**", "node_modules/**", "*.tgz", ".npmrc"],
+  "depth": 4,
+  "mode": "auto",
+  "guidance": {
+    "missing_extension_hints": true,
+    "ignored_extensions": ["js", "map", "d.ts"]
+  },
+  "routing": {
+    "retrieval": { "strategy": "keyword", "top_k": 4 },
+    "subsystems": [
+      {
+        "id": "metadata-doc-seam",
+        "paths": ["package.json", "README.md", "tests/metadata-drift.test.ts"],
+        "keywords": ["@aihu-plugin/kindly-note", "Auto-generated against", "Version", "exports"],
+        "docs": ["README.md"],
+        "note": "Package identity and version facts are copied into README text, not imports; codemap cannot follow that metadata seam. The drift test guards the costly release-version mismatch."
+      },
+      {
+        "id": "release-provenance-seam",
+        "paths": ["package.json", ".github/workflows/*.yml", "scripts/*.mjs", "docs/release-contract.md"],
+        "keywords": ["workspace:", "provenance", "id-token", "npm publish", "E404", "consumer"],
+        "docs": ["docs/release-contract.md"],
+        "note": "Release safety joins tag, manifest, registry, tarball, and workflow permission strings with no import edge for codemap to resolve."
+      }
+    ]
+  },
+  "drift": {
+    "enabled": true,
+    "recent_commits": 10,
+    "require_docs_for": ["metadata-doc-seam", "release-provenance-seam"]
+  }
+}

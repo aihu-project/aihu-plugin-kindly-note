@@ -1,0 +1,10 @@
+node_modules/
+dist/
+coverage/
+*.tgz
+.release/
+.npmrc
+
+# Codemap machine state is local; the tuned policy is tracked below.
+.codemap/*
+!.codemap/config.json

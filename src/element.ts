@@ -23,9 +23,8 @@
  * highlighting is async, so the element shows the escaped raw source
  * immediately and swaps in the scoped-span markup when the language resolves.
  *
- * SCOPE NOTE: this is the highlighting element only. `<aihu-markdown>` /
- * `renderMarkdown` are out of scope (blocked on the unbuilt
- * `@kindly-note/emitters-markdown` + kindly-note repo org access).
+ * The markdown element is implemented separately in markdown-element.ts so
+ * consumers can register either element independently.
  */
 
 import { type Dispose, effect } from '@aihu/signals'
