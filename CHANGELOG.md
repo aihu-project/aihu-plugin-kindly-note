@@ -1,5 +1,12 @@
 # @aihu-plugin/kindly-note
 
+## 0.2.5
+
+### Patch Changes
+
+- Prepare the standalone package repository with published dependency ranges,
+  pinned CI, and a fail-closed OIDC/provenance release contract.
+
 ## 0.2.4
 
 ### Patch Changes

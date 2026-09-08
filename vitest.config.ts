@@ -1,0 +1,14 @@
+import { defineConfig } from 'vitest/config'
+
+export default defineConfig({
+  resolve: {
+    alias: {
+      '@aihu-plugin/kindly-note': new URL('./src/index.ts', import.meta.url).pathname,
+    },
+  },
+  test: {
+    environment: 'jsdom',
+    include: ['tests/**/*.test.ts'],
+    passWithNoTests: false,
+  },
+})

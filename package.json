@@ -1,6 +1,6 @@
 {
   "name": "@aihu-plugin/kindly-note",
-  "version": "0.2.4",
+  "version": "0.2.5",
   "license": "MIT",
   "type": "module",
   "main": "./dist/index.js",
@@ -24,7 +24,11 @@
   "scripts": {
     "build": "rolldown -c",
     "typecheck": "tsc --noEmit",
-    "prepublishOnly": "bun run build"
+    "test": "vitest run",
+    "verify:pack": "node scripts/verify-pack.mjs",
+    "consumer:smoke": "node scripts/consumer-smoke.mjs",
+    "check:release": "node scripts/check-release.mjs",
+    "prepublishOnly": "npm run build"
   },
   "peerDependencies": {
     "@kindly-note/core": "^0.2.0",
@@ -50,24 +54,33 @@
     "@aihu/signals": "^0.5.1"
   },
   "devDependencies": {
-    "@aihu/plugin": "workspace:*",
-    "@aihu/server": "workspace:*",
+    "@aihu/plugin": "^0.1.1",
+    "@aihu/server": "^0.6.0",
+    "@types/node": "^20.16.5",
     "@kindly-note/core": "^0.2.0",
     "@kindly-note/emitters-html": "^0.1.0",
     "@kindly-note/loader-dynamic-import": "^0.1.0",
     "@kindly-note/lang-json": "^0.1.0",
     "@kindly-note/lang-typescript": "^0.1.0",
-    "@kindly-note/render-markdown": "^0.1.0"
+    "@kindly-note/render-markdown": "^0.1.0",
+    "jsdom": "^25.0.1",
+    "rolldown": "^1.0.0-rc.17",
+    "rolldown-plugin-dts": "^0.23.2",
+    "typescript": "^5.6.2",
+    "vitest": "^3.2.6"
   },
   "description": "Runtime syntax highlighting + markdown rendering for aihu \u2014 <aihu-code>/<aihu-markdown> custom elements + signal-aware highlight()/renderMarkdown() helpers, powered by published @kindly-note/* packages with lazy loading.",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/aihu-project/aihu.git",
-    "directory": "packages/plugin-kindly-note"
+    "url": "git+https://github.com/aihu-project/aihu-plugin-kindly-note.git"
   },
-  "homepage": "https://github.com/aihu-project/aihu/tree/main/packages/plugin-kindly-note#readme",
-  "bugs": "https://github.com/aihu-project/aihu/issues",
+  "homepage": "https://github.com/aihu-project/aihu-plugin-kindly-note#readme",
+  "bugs": "https://github.com/aihu-project/aihu-plugin-kindly-note/issues",
   "publishConfig": {
     "access": "public"
+  },
+  "engines": {
+    "node": ">=22.14.0",
+    "npm": ">=11.5.1"
   }
 }
