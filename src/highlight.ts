@@ -1,20 +1,18 @@
 /**
  * Runtime syntax-highlighting core for `@aihu-plugin/kindly-note`.
  *
- * Wraps the published v0.1.0 `@kindly-note/*` packages:
+ * Wraps the published `@kindly-note/*` packages:
  *   - `@kindly-note/core`            — `createHighlighter` engine + token stream
  *   - `@kindly-note/emitters-html`   — `htmlEmitter` (scoped `kn-` span output)
  *   - `@kindly-note/loader-dynamic-import` — `createDynamicImportLoader`
  *     resolves a language id (e.g. `'typescript'`) to its `@kindly-note/lang-*`
  *     package via native dynamic `import()`, so each language tokenizer is only
- *     fetched the first time it is actually used (~1.5 kB gz/language).
+ *     fetched the first time it is actually used.
  *
- * SCOPE NOTE (Shape A, round 1): this module ships the HIGHLIGHTING half only.
- * Markdown *rendering* (`@kindly-note/emitters-markdown` / `renderMarkdown` /
- * `<aihu-markdown>`) is deliberately NOT built here — that emitter is unbuilt
- * and blocked on org access to `srmcguirt/kindly-note`. Highlighting markdown
- * *source* (the `lang-markdown` tokenizer) is in scope; rendering markdown to
- * HTML is not.
+ * Markdown rendering lives alongside this module in render-markdown.ts and is
+ * loaded independently through the published render-markdown peer. Keeping
+ * the two loaders separate lets consumers use highlighting without installing
+ * the markdown renderer, or vice versa.
  */
 
 // Type-only imports are erased at compile time, so they add NO runtime import
@@ -90,7 +88,7 @@ const _registered = new Map<string, Promise<string | null>>()
 // Common aliases → the `@kindly-note/lang-<id>` package slug the loader resolves.
 // The dynamic-import loader resolves by package name derived from the id, so it
 // cannot map an alias (`ts`) to a differently-named package (`lang-typescript`)
-// on its own. This table covers the published v0.1.0 language set; an id that
+// on its own. This table covers the published language aliases; an id that
 // is not an alias passes through unchanged (so a future `@kindly-note/lang-rust`
 // works via the bare id `'rust'` with no table edit).
 const ALIAS_TO_PACKAGE: Readonly<Record<string, string>> = {

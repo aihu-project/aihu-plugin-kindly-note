@@ -17,16 +17,14 @@
     "README.md",
     "LICENSE"
   ],
-  "sideEffects": [
-    "./dist/element.js",
-    "./dist/markdown-element.js"
-  ],
+  "sideEffects": false,
   "scripts": {
     "build": "rolldown -c",
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
     "verify:pack": "node scripts/verify-pack.mjs",
     "consumer:smoke": "node scripts/consumer-smoke.mjs",
+    "check:peer-constraints": "node scripts/check-peer-constraints.mjs",
     "check:release": "node scripts/check-release.mjs",
     "prepublishOnly": "npm run build"
   },

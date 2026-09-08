@@ -30,6 +30,8 @@ jobs:
         run: |
           npm install --global npm@11.5.1
           test "$(npm --version)" = 11.5.1
+      - name: Record upstream peer constraint
+        run: npm run check:peer-constraints
       - name: Install dependencies
         run: npm ci --legacy-peer-deps
       - name: Build

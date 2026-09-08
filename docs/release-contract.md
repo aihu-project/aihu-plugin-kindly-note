@@ -7,20 +7,26 @@ rejected.
 
 The release workflow grants `id-token: write` and publishes with npm trusted
 publishing and `--provenance`. It does not use a classic npm token. The gate
-fails if token environment variables or a literal npm auth token are present;
-the setup-node `${NODE_AUTH_TOKEN}` placeholder is allowed because npm resolves
-it through the OIDC trusted-publisher exchange.
+fails if token environment variables or any `_authToken`, `_auth`, or
+`_auth-token` setting is present in the project, user, or global npmrc. It also
+checks npm config environment variables without including credential values in
+diagnostics. After the gate, release commands use an empty temporary user and
+global npmrc so ambient credentials cannot affect the publish.
 
 Before publish, the registry lookup must return HTTP 404 for this exact package
 and version. Every other response, including an existing version or an auth,
 rate-limit, or server error, stops the release. The package is built, type
 checked, tested, packed, and inspected from the actual tarball. The inspection
-checks package identity, version, export map, dependency ranges, required files,
-and absence of source, tests, release scripts, and workspace ranges. An isolated
-temporary npm consumer then imports the tarball and exercises the public export
-and unknown-language fallback.
+checks package identity, version, export map, dependency ranges, package file
+metadata, every main/export/types target, and an exact seven-file allowlist.
+An isolated temporary npm consumer installs that same tarball with the normal
+npm resolver, then imports the public export and exercises the unknown-language
+fallback.
 
-The development graph has an intentional peer range overlap between the
-published kindly-note engine packages. CI installs it with npm's
-`--legacy-peer-deps` resolver while the package's published peer contract stays
-unchanged; this keeps the tests on the engine versions used by the monorepo.
+The repository development graph cannot currently resolve with npm's strict
+peer resolver: the published `@kindly-note/emitters-html@0.1.0` declares
+`@kindly-note/core@^0.1.0`, while the published markdown stack and this package
+use `@kindly-note/core@^0.2.0`. No compatible upstream emitters-html release is
+published, so CI records this constraint and uses `--legacy-peer-deps` only for
+the repository's development install. The consumer proof intentionally uses a
+normal install of the packed package and does not use that flag.

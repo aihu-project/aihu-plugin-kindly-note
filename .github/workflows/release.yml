@@ -38,6 +38,8 @@ jobs:
         run: |
           npm install --global npm@11.5.1
           test "$(npm --version)" = 11.5.1
+      - name: Record upstream peer constraint
+        run: npm run check:peer-constraints
       - name: Install dependencies
         run: npm ci --legacy-peer-deps
       - name: Validate exact stable tag and commit
@@ -54,6 +56,14 @@ jobs:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
           NODE_AUTH_TOKEN: ${{ secrets.NODE_AUTH_TOKEN }}
         run: node scripts/check-oidc-auth.mjs
+      - name: Sanitize npm configuration for release
+        run: |
+          release_npmrc="$(mktemp)"
+          : > "$release_npmrc"
+          {
+            echo "NPM_CONFIG_USERCONFIG=$release_npmrc"
+            echo "NPM_CONFIG_GLOBALCONFIG=$release_npmrc"
+          } >> "$GITHUB_ENV"
       - name: Build, typecheck, and test
         run: |
           npm run build

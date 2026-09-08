@@ -13,7 +13,7 @@ custom elements and two signal-aware helpers, all rendered **in the browser, at
 runtime**, with **lazy-loaded** peers:
 
 - **Highlighting** — `<aihu-code>` + `highlight()` render scoped-span HTML, with
-  per-language tokenizers fetched on demand (~1.5 kB gz each).
+  language tokenizers fetched only when requested.
 - **Markdown rendering** — `<aihu-markdown>` + `renderMarkdown()` render
   CommonMark to **safe** semantic HTML via `@kindly-note/render-markdown` (raw
   HTML escaped, `javascript:`/unsafe `data:` URLs neutralised, `on*` handlers
@@ -178,7 +178,7 @@ bun add @aihu-plugin/kindly-note
 | **Version** | `0.2.5` |
 | **Tier** | F — UI — runtime syntax highlighting + markdown custom elements |
 | **Bundle size** | 1.65 kB (gz) — limit 1850 B |
-| **Published files** | 3 entries |
+| **Published files** | 7 archive files |
 | **License** | MIT |
 
 <sub><i>Auto-generated against `@aihu-plugin/kindly-note@0.2.5`.</i></sub>
