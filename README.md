@@ -134,6 +134,24 @@ const html = await renderMarkdown('```json\n{"a": 1}\n```', { languages: [json] 
 GFM (tables / task-lists / strikethrough / autolinks) is intentionally not
 supported — that lives in `@kindly-note/lang-markdown-gfm`.
 
+### Advanced exports
+
+Lower-level exports for callers that need them, alongside the helpers above:
+
+- `AIHU_CODE_TAG` / `AIHU_MARKDOWN_TAG` — the registered tag-name constants
+  (`'aihu-code'` / `'aihu-markdown'`), for code that needs the string rather
+  than a literal.
+- `getAihuCodeElement()` / `getAihuMarkdownElement()` — return the custom
+  element constructor without registering it via `customElements.define()`
+  (`defineCodeElement()` / `defineMarkdownElement()` call these internally).
+  Throws if called outside a DOM (e.g. during SSR).
+- `ensureLanguage(lang)` — resolves and registers a language's tokenizer
+  ahead of time, returning the canonical registered language name (or `null`
+  on load failure). `highlight()` calls this internally; use it directly to
+  pre-warm a language before first render.
+- `isLanguageRequested(lang)` — `true` once a language has been registered
+  via `ensureLanguage()` / `highlight()`.
+
 ### Plugin registration
 
 ```ts
@@ -223,8 +241,8 @@ bun add @aihu-plugin/kindly-note
 <!-- BEGIN_AUTOGEN: see-also -->
 <!-- regenerate: bun scripts/sync-readme.ts (also runs in pre-commit + CI) -->
 
-- [@aihu/ui](../ui)
-- [Aihu framework root](../../README.md)
+- [@aihu/ui](https://www.npmjs.com/package/@aihu/ui)
+- [Aihu framework](https://aihu.dev)
 
 <sub><i>Auto-generated against `@aihu-plugin/kindly-note@0.2.5`.</i></sub>
 
